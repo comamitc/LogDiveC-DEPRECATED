@@ -1,17 +1,6 @@
-#define BUFFER 2
-
-
-typedef struct {
-	char *s;
-	size_t len;
-	size_t b_size;
-} str;
-
-
-str * str_init();
-void str_append(str *s, char c);
-void str_resize(str *old, int buff);
-
+#include <stdlib.h>
+#include <string.h>
+#include "stringobj.h"
 /**
 	Initialize the string object
 */

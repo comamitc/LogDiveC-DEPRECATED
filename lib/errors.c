@@ -1,6 +1,6 @@
-void generic_error(const char *_file, const char *_func, int _line);
-void nomem_error(const char *_file, const char *_func, int _line);
-
+#include <stdlib.h>
+#include <stdio.h>
+#include "errors.h"
 /**
   generic error wrapper for application exit
 */

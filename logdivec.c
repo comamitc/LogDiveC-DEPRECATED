@@ -6,7 +6,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 /*
 	Need to handle these definitions nicely
 */
@@ -14,8 +13,8 @@
 #define __file__ __FILE__
 #define __line__ __LINE__
 
-#include "lib/errors.c"
-#include "lib/stringobj.c"
+#include "lib/errors.h"
+#include "lib/stringobj.h"
 
 
 // .c file
