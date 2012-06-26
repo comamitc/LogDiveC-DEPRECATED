@@ -1,0 +1,1 @@
+gcc -Wall logdivec.c -o logdivec
