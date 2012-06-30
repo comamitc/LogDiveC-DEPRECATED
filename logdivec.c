@@ -9,16 +9,13 @@
 /*
 	Need to handle these definitions nicely
 */
-#define __func__ __FUNCTION__
-#define __file__ __FILE__
-#define __line__ __LINE__
-
 #include "lib/errors.h"
 #include "lib/stringobj.h"
 
 
 // .c file
-void main(void){
+void main(void)
+{
 
 	char test_str[] = "SETTING UP LIB!";
 	int i;
