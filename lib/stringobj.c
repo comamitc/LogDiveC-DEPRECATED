@@ -40,7 +40,9 @@ void str_append(str *s, char c)
 	if(s->len+1 >= s->b_size) { /* check for out-of-bounds + null char */
 		/* string is out of bounds */
 		str_resize(s, (s->b_size + BUFFER));	
-	}	
+	}
+	
 	s->s[s->len++] = c;
-	s->s[s->len] = '\0'; 		
+	s->s[s->len] = '\0'; 
+
 }

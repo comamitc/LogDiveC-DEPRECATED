@@ -6,19 +6,19 @@
 
 #include "dictionary.h"
 
-//linking key
-#define HASHSIZE 101
+//linking key -- need to minimize this later
+#define HASHSIZE 101 
 
 dict *dict_init(){
 	dict *new_dict[HASHSIZE];
-	return new_dict;
+	return *new_dict;
 }
 
 /* hash: form hash value for string s */
 unsigned hash(char *s)
 {
     unsigned hashval;
-    for (hashval = 0; *s != ’\0’; s++)
+    for (hashval = 0; *s != '\0'; s++)
       hashval = *s + 31 * hashval;
     return hashval % HASHSIZE;
 }
@@ -39,8 +39,8 @@ void *install(dict *hashtab[], char *name, char *defn)
 {
     dict *np;
     unsigned hashval;
-    if ((np = lookup(name)) == NULL) { /* not found */
-        np = (nlist *) malloc(sizeof(*np));
+    if ((np = lookup(hashtab, name)) == NULL) { /* not found */
+        np = (dict *) malloc(sizeof(*np));
         if (np == NULL || (np->name = strdup(name)) == NULL)
           return NULL;
         hashval = hash(name);
@@ -53,12 +53,12 @@ void *install(dict *hashtab[], char *name, char *defn)
     return np;
 }
 
- /* make a duplicate of s */
+ /* make a duplicate of s 
  char *strdup(char *s)
 {
     char *p;
-    p = (char *) malloc(strlen(s)+1); /* +1 for ’\0’ */
+    p = (char *) malloc(strlen(s)+1); 
     if (p != NULL)
        strcpy(p, s);
     return p;
-}
+}*/
