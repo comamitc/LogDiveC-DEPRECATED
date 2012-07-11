@@ -7,10 +7,8 @@
 
 #include "dictionary.h"
 
-//linking key -- need to minimize this later
-
-
-dict *dict_init(){
+dict *dict_init()
+{
 	dict *new_dict[HASHSIZE] = {};
 	return *new_dict;
 }
@@ -29,13 +27,10 @@ void * lookup(dict *hashtab[], char *s)
 {
     dict *np;
 	unsigned int hashval = hash(s);
-	for (np = hashtab[hashval]; np != NULL; np = np->next) {
-		printf("Entering lookup loop\n");
+	for (np = hashtab[hashval]; np != NULL; np = np->next) 
 		if (strcmp(s, np->name) == 0)
-			return np;
-	}					/* found 	 */
-	printf("returning null\n");
-    return NULL;		/* not found */
+			return np;			/* found 	 */
+    return NULL;				/* not found */
 }
 
 /* install: put (name, defn) in hashtab */
@@ -59,13 +54,12 @@ void *install(dict *hashtab[], char *name, char *defn)
 
 void prnt_dict(dict *hashtab[])
 {
-	
 	int i;
 	dict *np;
 	
+	printf("{ ");
 	for (i = 0; i < HASHSIZE; i++)
 		for (np = hashtab[i]; np != NULL; np = np->next)
-			printf("Key: %s, Value: %s\n", np->name, np->defn);
-		
-	
+			printf("%s: %s, ", np->name, np->defn);
+	printf("}\n");	
 }

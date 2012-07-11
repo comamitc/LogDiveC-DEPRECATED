@@ -21,7 +21,14 @@ void nomem_error(const char *_file, const char *_func, int _line)
 	generic_error(_file, _func, _line); 
 }
 
-void nofile_error(const char *filename, const char *_file, const char *_func, int _line){
+void nofile_error(const char *filename, const char *_file, const char *_func, int _line)
+{
 	printf("Exception: Cannot open file: %s\n", filename);
+	generic_error(_file, _func, _line); 
+}
+
+void badconfile_error(const char *filename, const char *_file, const char *_func, int _line) 
+{
+	printf("Exception: Malformed config file: %s\n", filename);
 	generic_error(_file, _func, _line); 
 }

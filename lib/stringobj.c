@@ -44,7 +44,7 @@ void str_append(char * s, char c) {
 	
 }
 
-void str_fdestroy(char *s){
-	/* prob don't need this */
+void str_realloc(char *s){
 	free(s);
+	s = str_init();
 }
