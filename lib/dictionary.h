@@ -3,10 +3,10 @@
 
 #define HASHSIZE 101 
 
-typedef struct _nlist { /* table entry: */
-    struct _nlist *next; /* next entry in chain */
-    char *name; 		/* defined name */
-    char *defn; 		/* replacement text */
+typedef struct _nlist { 	/* table entry: */
+    struct _nlist *next; 	/* next entry in chain */
+    char *name; 			/* defined name */
+    char *defn; 			/* replacement text */
 } dict;
 
 dict *dict_init();

@@ -1,5 +1,7 @@
 #include "confile.h"
 
+
+
 void parse_conf(dict *conf[], char * fname) 
 {
 	char ch;
@@ -38,12 +40,7 @@ void parse_conf(dict *conf[], char * fname)
 					str_realloc(v);
 				}
 				break;
-			case ',': // comma seperated value pair
-				if (!isKey) {
-					install(conf, k, v);
-					str_realloc(v);
-					
-				}
+			case ' ': // consume whitespace in path
 				break;
 			default: // if character other than specified
 				if (!isCom) 

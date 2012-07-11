@@ -25,6 +25,6 @@ void main(void)
 	
 	parse_conf(inif, INIFILE);
 	
-	prnt_dict(inif);
+	//prnt_dict(inif);
 	
 }

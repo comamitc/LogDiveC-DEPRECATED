@@ -26,7 +26,7 @@ unsigned hash(char *s)
 void * lookup(dict *hashtab[], char *s)
 {
     dict *np;
-	unsigned int hashval = hash(s);
+	unsigned hashval = hash(s);
 	for (np = hashtab[hashval]; np != NULL; np = np->next) 
 		if (strcmp(s, np->name) == 0)
 			return np;			/* found 	 */

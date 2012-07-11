@@ -6,7 +6,7 @@
 #ifndef STRING_PROPS
 #define STRING_PROPS
 
-#define BUFFER 256
+#define BUFFER 128
 
 char * str_init();
 void str_append(char *s, char c);
