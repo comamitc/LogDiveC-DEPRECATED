@@ -11,7 +11,7 @@
 
 
 dict *dict_init(){
-	dict *new_dict[HASHSIZE];
+	dict *new_dict[HASHSIZE] = {};
 	return *new_dict;
 }
 
@@ -25,12 +25,12 @@ unsigned hash(char *s)
 }
 
 /* lookup: look for s in hashtab */
-void *lookup(dict *hashtab[], char *s)
+void * lookup(dict *hashtab[], char *s)
 {
     dict *np;
-	unsigned hashval = hash(s);
+	unsigned int hashval = hash(s);
 	for (np = hashtab[hashval]; np != NULL; np = np->next) {
-        printf("in for loop\n");
+		printf("Entering lookup loop\n");
 		if (strcmp(s, np->name) == 0)
 			return np;
 	}					/* found 	 */
@@ -63,7 +63,7 @@ void prnt_dict(dict *hashtab[])
 	int i;
 	dict *np;
 	
-	for (i = 0; i <= HASHSIZE; i++)
+	for (i = 0; i < HASHSIZE; i++)
 		for (np = hashtab[i]; np != NULL; np = np->next)
 			printf("Key: %s, Value: %s\n", np->name, np->defn);
 		

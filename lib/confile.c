@@ -21,16 +21,15 @@ void parse_conf(dict *conf[], char * fname)
 	{
 		switch (ch)
 		{
-			case '=': 
+			case '=':  // identifier end
 				isKey = 0;
-				break; // this should finish the key value
-			case '\n': 
+				break; 
+			case '\n': // line end
 				isKey = 1; 
-				printf("Installing: %s - %s\n", k, v);
 				install(conf, k, v);
-				str_fdestroy(k);
-				str_fdestroy(v);
-				break; // this should finish the value value
+				free(k);
+				free(v);
+				break; 
 			default: 
 				if (isKey) str_append(k, ch); else str_append(v, ch); 
 				break;
@@ -38,7 +37,7 @@ void parse_conf(dict *conf[], char * fname)
 	}
 
 	// catching the last install but only if they are formed!
-	printf("Installing: %s - %s\n", k, v);
+	// in case of EOF before \n
 	install(conf, k, v);
 
 }

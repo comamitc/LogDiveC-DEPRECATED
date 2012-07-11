@@ -21,11 +21,10 @@
 void main(void)
 {
 
-	dict *inif[HASHSIZE]; //= dict_init();
-
+	dict *inif[HASHSIZE] = {}; // initialized to NULL 
+	
 	parse_conf(inif, INIFILE);
-	printf("parsed\n");
-
+	
 	prnt_dict(inif);
 	
 }
