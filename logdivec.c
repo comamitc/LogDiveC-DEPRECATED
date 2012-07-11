@@ -11,16 +11,21 @@
 */
 #include "lib/errors.h"
 #include "lib/stringobj.h"
+#include "lib/dictionary.h"
+
 #include "lib/confile.h"
 
 #define INIFILE "config/config.ini"
-
 
 // .c file
 void main(void)
 {
 
-	dict *config = parse_conf(INIFILE);
+	dict *inif[HASHSIZE]; //= dict_init();
 
+	parse_conf(inif, INIFILE);
+	printf("parsed\n");
+
+	prnt_dict(inif);
 	
 }

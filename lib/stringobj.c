@@ -1,48 +1,50 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "stringobj.h"
 /**
 	Initialize the string object
 */
-str * str_init() 
-{
-	str *new_str = (str *) malloc(sizeof(str));
+
+
+char * str_init() {
+	/* string fast alloc to char pointer for lightweight strings */
+	char *s;
+	s = (char *) malloc(sizeof(char)*BUFFER);
 	
-	new_str->s = (char *) malloc(sizeof(char)*BUFFER);
-	if (new_str->s == NULL){
-		nomem_error(__file__, __func__, __line__);		
-	}
-	
-	//init the other properties
-	new_str->len = 0;
-	new_str->b_size = BUFFER;
-	return new_str;
+	if (!s)
+		nomem_error(__FILE__, __FUNCTION__, __LINE__); // bad alloc
+
+	s[0] = '\0'; // termination
 }
 
-void str_resize(str *old, int buff) 
-{
-	/*
-		base method to resize string when it gets out of bounds
-	*/
-	char *tmp = (char *) malloc(sizeof(char)*(buff));
+void __resize_str(char * s, size_t buff) {
+	char *tmp =  (char *) malloc(sizeof(char)*buff);
 	
-	if (tmp == NULL){
-		nomem_error(__file__, __func__, __line__);
-	}
-	strcpy(tmp, old->s);
-	free(old->s);
-	old->s = tmp;
-	old->b_size = buff;
+	if (!tmp)
+			nomem_error(__FILE__, __FUNCTION__, __LINE__);
+
+	strcpy(tmp, s); 
+	
+	s = tmp;
+
 }
 
-void str_append(str *s, char c) 
-{	
-	if(s->len+1 >= s->b_size) { /* check for out-of-bounds + null char */
-		/* string is out of bounds */
-		str_resize(s, (s->b_size + BUFFER));	
+void str_append(char * s, char c) {
+	
+	int len = strlen(s)+1;
+	
+	if ((len % BUFFER) == 0 && len >= BUFFER) { 	// len is not 0 and exceeds buffer
+		size_t b_size = ((len/BUFFER) + 1)*BUFFER; 	// how to optimize this arithemtic
+		__resize_str(s, b_size);
 	}
 	
-	s->s[s->len++] = c;
-	s->s[s->len] = '\0'; 
+	s[len-1] = c;
+	s[len] = '\0';
+	
+}
 
+void str_fdestroy(char *s){
+	/* prob don't need this */
+	free(s);
 }

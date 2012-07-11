@@ -2,12 +2,13 @@
 */
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 
 #include "dictionary.h"
 
 //linking key -- need to minimize this later
-#define HASHSIZE 101 
+
 
 dict *dict_init(){
 	dict *new_dict[HASHSIZE];
@@ -28,10 +29,13 @@ void *lookup(dict *hashtab[], char *s)
 {
     dict *np;
 	unsigned hashval = hash(s);
-    for (np = hashtab[hashval]; np != NULL; np = np->next)
-        if (strcmp(s, np->name) == 0)
-          return np; /* found 	  */
-    return NULL;     /* not found */
+	for (np = hashtab[hashval]; np != NULL; np = np->next) {
+        printf("in for loop\n");
+		if (strcmp(s, np->name) == 0)
+			return np;
+	}					/* found 	 */
+	printf("returning null\n");
+    return NULL;		/* not found */
 }
 
 /* install: put (name, defn) in hashtab */
@@ -53,12 +57,15 @@ void *install(dict *hashtab[], char *name, char *defn)
     return np;
 }
 
- /* make a duplicate of s 
- char *strdup(char *s)
+void prnt_dict(dict *hashtab[])
 {
-    char *p;
-    p = (char *) malloc(strlen(s)+1); 
-    if (p != NULL)
-       strcpy(p, s);
-    return p;
-}*/
+	
+	int i;
+	dict *np;
+	
+	for (i = 0; i <= HASHSIZE; i++)
+		for (np = hashtab[i]; np != NULL; np = np->next)
+			printf("Key: %s, Value: %s\n", np->name, np->defn);
+		
+	
+}

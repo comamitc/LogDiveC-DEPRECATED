@@ -8,6 +8,6 @@
 #include "dictionary.h"
 #include "errors.h"
 
-dict * parse_conf(char * fname);
+void parse_conf(dict *conf[], char * fname);
 
 #endif /*config head */
