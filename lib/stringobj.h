@@ -10,6 +10,6 @@
 
 char * str_init();
 void str_append(char *s, char c);
-void str_fdestroy(char *s);
+void str_realloc(char *s);
 
 #endif /* string props */

@@ -41,10 +41,11 @@ void str_append(char * s, char c) {
 	
 	s[len-1] = c;
 	s[len] = '\0';
-	
 }
 
 void str_realloc(char *s){
 	free(s);
 	s = str_init();
 }
+
+
