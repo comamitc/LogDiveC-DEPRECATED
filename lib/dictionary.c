@@ -7,6 +7,7 @@
 
 #include "dictionary.h"
 
+// ToDo: depreciate this!
 dict *dict_init()
 {
 	dict *new_dict[HASHSIZE] = {};

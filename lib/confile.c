@@ -25,24 +25,24 @@ void parse_conf(dict *conf[], char * fname)
 	{
 		switch (ch)
 		{
-			case '=':  // identifier end
+			case '=':  	// identifier end
 				isKey = 0;
 				break;
-			case '#': // comment begin - ignore until line end
+			case '#': 	// comment begin - ignore until line end
 				isCom = 1;
 				break;
-			case '\n': // line end
+			case '\n': 	// line end
 				isKey = 1; 
 				isCom = 0;
 				if (strlen(k) > 0 && strlen(v) > 0) {
 					install(conf, k, v);
 					str_realloc(k);
 					str_realloc(v);
-				}
+				} 		// else probably a blank line
 				break;
-			case ' ': // consume whitespace in path
+			case ' ': 	// consume whitespace in path
 				break;
-			default: // if character other than specified
+			default: 	// if character other than specified
 				if (!isCom) 
 				{
 					if (isKey) 
@@ -56,10 +56,12 @@ void parse_conf(dict *conf[], char * fname)
 
 	// catching the last install but only if they are formed!
 	// in case of EOF before \n
-	if (strlen(k) > 0 && strlen(v) > 0)
+	if (strlen(k) > 0 && strlen(v) > 0) {
 		install(conf, k, v);
+		free(k);
+		free(v);
+	}
 	else
 		badconfile_error(fname, __FILE__, __FUNCTION__, __LINE__);
 		
-
 }
