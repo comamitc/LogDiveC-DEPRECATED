@@ -43,6 +43,13 @@ void str_append(char * s, char c) {
 	s[len] = '\0';
 }
 
+void str_concat(char *s, char *ss)
+{
+	int i;
+	for (i = 0; i < strlen(ss); i++)
+		str_append(s, ss[i]);
+}
+
 void str_realloc(char *s){
 	free(s);
 	s = str_init();
