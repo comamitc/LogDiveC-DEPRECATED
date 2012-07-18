@@ -9,6 +9,11 @@
 #include "dictionary.h"
 #include "errors.h"
 
+// configuration definitions
+#define INIFILE "config/config.ini"
+#define DIRECT "directory"
+#define DELIM ","
+
 void parse_conf(dict *conf[], char * fname);
 
 #endif /*config head */

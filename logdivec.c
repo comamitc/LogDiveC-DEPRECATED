@@ -14,56 +14,58 @@
 #include "lib/dictionary.h"
 #include "lib/confile.h"
 
-// configuration definitions
-#define INIFILE "config/config.ini"
-#define DIRECT "directory"
-#define DELIM ","
-//#define BUILD "\\build\\bin\0"
 
-
-void ls_dir(char *dirpath);
+void ls_dir(char *files[], char *dirpath);
 
 
 // .c file
 void main(void)
 {
-
-	dict *inif[HASHSIZE] = {}; // initialized to NULL 
-	
+	dict *inif[HASHSIZE] = {}; // initialized to NULL 	
 	dict *dirs;
 	char *dir;
 	char *fpath = str_init();
-	char *build_path = "\\build\\bin\0";
+	char *build_path = "\\build\\bin";
+	char *files[256] = {};
+	int i;
 	
 	parse_conf(inif, INIFILE);
-	
-	dirs = lookup(inif, DIRECT);
-	
-		
+	dirs = lookup(inif, DIRECT);		
 	dir = strtok(dirs->defn, DELIM);
+	
 	while (dir != NULL) {
 		// str copy becuase of the null check at end
 		strcpy(fpath, dir);
 		str_concat(fpath, build_path); 			// built in concat func
-		ls_dir(fpath);	
+		ls_dir(files, fpath);
 		dir = strtok(NULL, DELIM);
+	}
+	
+	for (i = 0; i < 256; i++)
+	{
+		printf("%s\n", files[i]);
 	}
 }
 
 
-void ls_dir(char *dirpath)
+void ls_dir(char *files[], char *dirpath)
 {
 	int i = 0;
 	DIR *dir = NULL;
-	struct dirent *ent = NULL;
-	char *files[256] = {};
+	char *fn = NULL;
+	struct dirent *f_obj = NULL;
+	
 	dir = opendir(dirpath);
 	
 	if (dir == NULL)
 		printf("This directory sucks!");
 
-	while (ent = readdir(dir))
-		files[i++] = ent->d_name;
+	while (f_obj = readdir(dir)) 
+	{
+		printf("%s - %d\n", f_obj->d_name, i);
+		
+	}
 
 	closedir(dir);
+	//return *files;
 }
