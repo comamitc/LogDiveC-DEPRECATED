@@ -1,5 +1,7 @@
 /***
-	Main entry point for program
+	LogDiveC: Copyright 2012
+	Author(s): Mitch Comardo
+	Description: Parses Apache log file sets recording errors on the way
 */
 
 // to be split into header
@@ -14,8 +16,10 @@
 #include "lib/dictionary.h"
 #include "lib/confile.h"
 
+// ToDo: make this generic in config file (if not null check below)
+#define BUILD_PATH "\\build\\bin"
 
-void ls_dir(char *files[], char *dirpath);
+void ls_dir(char *files[], const char *dirpath);
 
 
 // .c file
@@ -34,37 +38,29 @@ void main(void)
 	dir = strtok(dirs->defn, DELIM);
 	
 	while (dir != NULL) {
-		// str copy becuase of the null check at end
 		strcpy(fpath, dir);
-		str_concat(fpath, build_path); 			// built in concat func
+		str_concat(fpath, build_path);
 		ls_dir(files, fpath);
+		
+		// keep iterating
 		dir = strtok(NULL, DELIM);
-	}
-	
-	for (i = 0; i < 256; i++)
-	{
-		printf("%s\n", files[i]);
 	}
 }
 
 
-void ls_dir(char *files[], char *dirpath)
+void ls_dir(char *files[], const char *dirpath)
 {
 	int i = 0;
 	DIR *dir = NULL;
-	char *fn = NULL;
 	struct dirent *f_obj = NULL;
 	
 	dir = opendir(dirpath);
 	
 	if (dir == NULL)
-		printf("This directory sucks!");
+		nodirectory_error(dirpath, __FILE__, __FUNCTION__, __LINE__);
 
-	while (f_obj = readdir(dir)) 
-	{
-		printf("%s - %d\n", f_obj->d_name, i);
-		
-	}
+	while ((f_obj = readdir(dir))) 
+		files[i++] = strdup(f_obj->d_name);
 
 	closedir(dir);
 	//return *files;

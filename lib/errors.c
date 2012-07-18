@@ -32,3 +32,9 @@ void badconfile_error(const char *filename, const char *_file, const char *_func
 	printf("Exception: Malformed config file: %s\n", filename);
 	generic_error(_file, _func, _line); 
 }
+
+void nodirectory_error(const char *dir, const char *_file, const char *_func, int _line)
+{
+	printf("Exception: %s not a valid directory\n", dir);
+	generic_error(_file, _func, _line); 
+}
