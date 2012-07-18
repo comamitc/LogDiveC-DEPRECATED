@@ -1,10 +1,6 @@
-#ifndef DEBUG_PROPS
-#define DEBUG_PROPS
 
-#endif /* DEBUG_PROPS */
-
-#ifndef STRING_PROPS
-#define STRING_PROPS
+#ifndef _STR_H
+#define _STR_H
 
 #define BUFFER 128
 

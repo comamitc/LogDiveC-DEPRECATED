@@ -20,14 +20,11 @@ char * str_init() {
 
 void __resize_str(char * s, size_t buff) {
 	char *tmp =  (char *) malloc(sizeof(char)*buff);
-	
 	if (!tmp)
 			nomem_error(__FILE__, __FUNCTION__, __LINE__);
 
 	strcpy(tmp, s); 
-	
 	s = tmp;
-
 }
 
 void str_append(char * s, char c) {
@@ -45,9 +42,8 @@ void str_append(char * s, char c) {
 
 void str_concat(char *s, char *ss)
 {
-	int i;
-	for (i = 0; i < strlen(ss); i++)
-		str_append(s, ss[i]);
+	while (*ss != '\0')
+		str_append(s, *ss++);
 }
 
 void str_realloc(char *s){

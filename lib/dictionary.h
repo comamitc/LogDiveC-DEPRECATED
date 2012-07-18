@@ -1,5 +1,5 @@
-#ifndef DICT_PROPS
-#define DICT_PROPS
+#ifndef _DICT_H
+#define _DICT_H
 
 #define HASHSIZE 101 
 
@@ -9,7 +9,6 @@ typedef struct _nlist { 	/* table entry: */
     char *defn; 			/* replacement text */
 } dict;
 
-dict *dict_init();
 void *install(dict *hashtab[], char *name, char *defn);
 void *lookup(dict *hashtab[], char *s);
 unsigned hash(char *s);

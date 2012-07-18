@@ -7,12 +7,6 @@
 
 #include "dictionary.h"
 
-// ToDo: depreciate this!
-dict *dict_init()
-{
-	dict *new_dict[HASHSIZE] = {};
-	return *new_dict;
-}
 
 /* hash: form hash value for string s */
 unsigned hash(char *s)

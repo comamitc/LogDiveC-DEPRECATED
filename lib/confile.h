@@ -1,5 +1,5 @@
-#ifndef CONFIG_HEAD
-#define CONFIG_HEAD
+#ifndef _CONFIG_H
+#define _CONFIG_H
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -19,7 +19,7 @@
 // ToDo: make this generic in config file (if not null check below)
 #define BUILD_PATH "\\build\\bin"
 
-void ls_dir(char *files[], const char *dirpath);
+void ls_dir(char *files[], char *dirpath);
 
 
 // .c file
@@ -27,35 +27,34 @@ void main(void)
 {
 	dict *inif[HASHSIZE] = {}; // initialized to NULL 	
 	dict *dirs;
-	char *dir;
-	char *fpath = str_init();
-	char *build_path = "\\build\\bin";
+	char *dir = str_init(), *d_cpy = str_init();
 	char *files[256] = {};
-	int i;
 	
 	parse_conf(inif, INIFILE);
 	dirs = lookup(inif, DIRECT);		
 	dir = strtok(dirs->defn, DELIM);
 	
 	while (dir != NULL) {
-		strcpy(fpath, dir);
-		str_concat(fpath, build_path);
-		ls_dir(files, fpath);
+		strcpy(d_cpy, dir);
+		strcat(d_cpy, BUILD_PATH);
+		ls_dir(files, d_cpy);	   // List files
 		
-		// keep iterating
-		dir = strtok(NULL, DELIM);
+		/*
+			do parse here
+		*/
+		
+		dir = strtok(NULL, DELIM); // for each until no more delimiters
 	}
 }
 
 
-void ls_dir(char *files[], const char *dirpath)
+void ls_dir(char *files[], char *dirpath)
 {
 	int i = 0;
 	DIR *dir = NULL;
 	struct dirent *f_obj = NULL;
 	
 	dir = opendir(dirpath);
-	
 	if (dir == NULL)
 		nodirectory_error(dirpath, __FILE__, __FUNCTION__, __LINE__);
 
@@ -63,5 +62,4 @@ void ls_dir(char *files[], const char *dirpath)
 		files[i++] = strdup(f_obj->d_name);
 
 	closedir(dir);
-	//return *files;
 }

@@ -1,5 +1,5 @@
-#ifndef ERROR_MSGS
-#define ERROR_MSGS
+#ifndef _ERR_H
+#define _ERR_H
 
 void generic_error(const char *_file, const char *_func, int _line);
 void nomem_error(const char *_file, const char *_func, int _line);
