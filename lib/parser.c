@@ -12,7 +12,7 @@ void parse_logs(char *files[])
 		// is it faster?
 		ext  = strtok(w_file, EXT_DELIM);
 		while (ext != NULL)
-			ext = strtok(NULL, EXT_DELIM);
+			ext = strtok(NULL, EXT_DELIM); // get extension
 			
 		if (strcmp(ext, "txt") || strcmp(ext, "log"))
 			; //t_parser

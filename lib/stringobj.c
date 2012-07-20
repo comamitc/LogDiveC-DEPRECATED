@@ -2,11 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "stringobj.h"
+
 /**
 	Initialize the string object
 */
-
-
 char * str_init() {
 	/* string fast alloc to char pointer for lightweight strings */
 	char *s;
@@ -15,7 +14,7 @@ char * str_init() {
 	if (!s)
 		nomem_error(__FILE__, __FUNCTION__, __LINE__); // bad alloc
 
-	s[0] = '\0'; // termination
+	*s = '\0'; // termination
 }
 
 void __resize_str(char * s, size_t buff) {
@@ -27,7 +26,7 @@ void __resize_str(char * s, size_t buff) {
 	s = tmp;
 }
 
-void str_append(char * s, char c) {
+void str_append(char *s, char c) {
 	
 	int len = strlen(s)+1;
 	
@@ -40,13 +39,29 @@ void str_append(char * s, char c) {
 	s[len] = '\0';
 }
 
-void str_concat(char *s, char *ss)
+void str_concat(char *s, char *ss) /* Not Needed*/
 {
 	while (*ss != '\0')
 		str_append(s, *ss++);
 }
 
-void str_realloc(char *s){
+void str_strip(char *s)
+{
+	int len = strlen(s);
+	char *ss = str_init();
+	
+	while (s[--len] == ' ')
+		s[len] = '\0';
+	
+	while (*s == ' ')
+	{
+		printf("forward\n");
+		s++;
+	}
+}
+
+void str_realloc(char *s)
+{
 	free(s);
 	s = str_init();
 }

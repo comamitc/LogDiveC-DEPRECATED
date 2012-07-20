@@ -37,6 +37,7 @@ void main(void)
 	while (dir != NULL) {
 		strcpy(d_cpy, dir);
 		strcat(d_cpy, BUILD_PATH);
+		str_strip(d_cpy);
 		ls_dir(files, d_cpy);	   // List files
 		
 		/*

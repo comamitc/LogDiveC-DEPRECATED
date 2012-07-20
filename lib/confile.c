@@ -1,7 +1,6 @@
 #include "confile.h"
 
 
-
 void parse_conf(dict *conf[], char * fname) 
 {
 	char ch;
@@ -35,12 +34,12 @@ void parse_conf(dict *conf[], char * fname)
 				isKey = 1; 
 				isCom = 0;
 				if (strlen(k) > 0 && strlen(v) > 0) {
+					str_strip(k);
+					str_strip(v);
 					install(conf, k, v);
 					str_realloc(k);
 					str_realloc(v);
 				} 		// else probably a blank line
-				break;
-			case ' ': 	// consume whitespace in path
 				break;
 			default: 	// if character other than specified
 				if (!isCom) 
@@ -57,11 +56,14 @@ void parse_conf(dict *conf[], char * fname)
 	// catching the last install but only if they are formed!
 	// in case of EOF before \n
 	if (strlen(k) > 0 && strlen(v) > 0) {
+		str_strip(k);
+		str_strip(v);
 		install(conf, k, v);
 		free(k);
 		free(v);
 	}
+	/** Not a good place for this exception
 	else
-		badconfile_error(fname, __FILE__, __FUNCTION__, __LINE__);
+		badconfile_error(fname, __FILE__, __FUNCTION__, __LINE__);*/
 		
 }

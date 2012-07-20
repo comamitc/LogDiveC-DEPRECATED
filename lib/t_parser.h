@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-dict * begin_txt_parse();
+void t_parse(char *filename);
+int is_newline(char *line);
 
 #endif
